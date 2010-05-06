@@ -38,6 +38,8 @@ typedef enum {
 extern NSString * const kFPXMLParserAtomNamespaceURI;
 extern NSString * const kFPXMLParserDublinCoreNamespaceURI;
 extern NSString * const kFPXMLParserContentNamespaceURI;
+extern NSString * const kFPXMLParserMediaRSSNamespaceURI;
+extern NSString * const kFPXMLParserItunesPodcastNamespaceURI;
 
 @interface FPXMLParser : NSObject <FPXMLParserProtocol, NSCoding> {
 @protected

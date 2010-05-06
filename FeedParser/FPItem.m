@@ -36,6 +36,17 @@
 @property (nonatomic, copy, readwrite) NSString *creator;
 @property (nonatomic, copy, readwrite) NSDate *pubDate;
 @property (nonatomic, copy, readwrite) NSString *author;
+//For use with MediaRSS
+@property (nonatomic, copy, readwrite) NSString *thumbnailURL;
+// for use with itunes podcasts
+@property (nonatomic, copy, readwrite) NSString *itunesAuthor;
+@property (nonatomic, copy, readwrite) NSString *itunesSubtitle;
+@property (nonatomic, copy, readwrite) NSString *itunesSummary;
+@property (nonatomic, copy, readwrite) NSString *itunesBlock;
+@property (nonatomic, copy, readwrite) NSString *itunesDuration;
+@property (nonatomic, copy, readwrite) NSString *itunesKeywords;
+@property (nonatomic, copy, readwrite) NSString *itunesExplict;
+
 - (void)rss_pubDate:(NSString *)textValue attributes:(NSDictionary *)attributes parser:(NSXMLParser *)parser;
 - (void)rss_link:(NSString *)textValue attributes:(NSDictionary *)attributes parser:(NSXMLParser *)parser;
 - (void)atom_link:(NSDictionary *)attributes parser:(NSXMLParser *)parser;
@@ -43,8 +54,9 @@
 @end
 
 @implementation FPItem
-@synthesize title, link, links, guid, description, content, pubDate, author, enclosures;
+@synthesize title, link, links, guid, description, content, pubDate, author, enclosures, thumbnailURL;
 @synthesize creator;
+@synthesize itunesAuthor,itunesSubtitle,itunesSummary,itunesBlock,itunesDuration,itunesKeywords,itunesExplict;
 
 + (void)initialize {
 	if (self == [FPItem class]) {
@@ -55,6 +67,7 @@
 		[self registerRSSHandler:@selector(setDescription:) forElement:@"description" type:FPXMLParserTextElementType];
 		[self registerRSSHandler:@selector(rss_pubDate:attributes:parser:) forElement:@"pubDate" type:FPXMLParserTextElementType];
 		[self registerRSSHandler:@selector(rss_enclosure:parser:) forElement:@"enclosure" type:FPXMLParserSkipElementType];
+		
 		for (NSString *key in [NSArray arrayWithObjects:@"category", @"comments", @"source", nil]) {
 			[self registerRSSHandler:NULL forElement:key type:FPXMLParserSkipElementType];
 		}
@@ -64,7 +77,44 @@
 		[self registerTextHandler:@selector(setCreator:) forElement:@"creator" namespaceURI:kFPXMLParserDublinCoreNamespaceURI];
 		// Content
 		[self registerTextHandler:@selector(setContent:) forElement:@"encoded" namespaceURI:kFPXMLParserContentNamespaceURI];
+		// Media RSS
+		[self registerTextHandler:@selector(mediaRSS_content:attributes:parser:) forElement:@"content" namespaceURI:kFPXMLParserMediaRSSNamespaceURI];
+		[self registerTextHandler:@selector(mediaRSS_thumbnail:attributes:parser:) forElement:@"thumbnail" namespaceURI:kFPXMLParserMediaRSSNamespaceURI];
+		
+		// Podcasts
+		[self registerTextHandler:@selector(setItunesAuthor:) forElement:@"author" namespaceURI:kFPXMLParserItunesPodcastNamespaceURI];
+		[self registerTextHandler:@selector(setItunesSubtitle:) forElement:@"subtitle" namespaceURI:kFPXMLParserItunesPodcastNamespaceURI];
+		[self registerTextHandler:@selector(setItunesSummary:) forElement:@"summary" namespaceURI:kFPXMLParserItunesPodcastNamespaceURI];
+		[self registerTextHandler:@selector(setItunesBlock:) forElement:@"block" namespaceURI:kFPXMLParserItunesPodcastNamespaceURI];
+		[self registerTextHandler:@selector(setItunesDuration:) forElement:@"duration" namespaceURI:kFPXMLParserItunesPodcastNamespaceURI];
+		[self registerTextHandler:@selector(setItunesKeywords:) forElement:@"keywords" namespaceURI:kFPXMLParserItunesPodcastNamespaceURI];
+		[self registerTextHandler:@selector(setItunesExplict:) forElement:@"explict" namespaceURI:kFPXMLParserItunesPodcastNamespaceURI];
+		 
 	}
+}
+
+- (void)dealloc {
+	[title release];
+	[link release];
+	[links release];
+	[guid release];
+	[description release];
+	[content release];
+	[pubDate release];
+	[creator release];
+	[author release];
+	[enclosures release];
+	//MediaRSS
+	thumbnailURL  = nil;
+	//iTunes
+	itunesAuthor = nil;
+	itunesSubtitle = nil;
+	itunesSummary = nil;
+	itunesBlock = nil;
+	itunesDuration = nil;
+	itunesKeywords = nil;
+	itunesExplict = nil;
+	[super dealloc];
 }
 
 - (id)initWithBaseNamespaceURI:(NSString *)namespaceURI {
@@ -98,6 +148,21 @@
 	}
 	[links addObject:aLink];
 	[aLink release];
+}
+
+-(void) mediaRSS_thumbnail:(NSString *)text attributes:(NSDictionary*)attributes parser:(NSXMLParser *)parser{
+	NSString *url = [attributes objectForKey:@"url"];
+	if(!url) return;
+	self.thumbnailURL = url;
+}
+
+-(void) mediaRSS_content:(NSString *)text attributes:(NSDictionary*)attributes parser:(NSXMLParser *)parser {
+	NSString *type = [attributes objectForKey:@"type"];
+	NSString *url = [attributes objectForKey:@"url"];
+	if(type && url){
+		if([type isEqualToString:@"image/jpeg"] || [type isEqualToString:@"image/png"])
+			self.thumbnailURL = url;
+	}
 }
 
 - (void)rss_enclosure:(NSDictionary *)attributes parser:(NSXMLParser *)parser {
@@ -176,4 +241,5 @@
 	[aCoder encodeObject:author forKey:@"author"];
 	[aCoder encodeObject:enclosures forKey:@"enclosures"];
 }
+
 @end

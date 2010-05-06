@@ -40,6 +40,16 @@
 	NSString *creator; // <dc:creator>
 	NSString *author;
 	NSMutableArray *enclosures;
+	//MediaRSS
+	NSString *thumbnailURL;
+	//Podcasts
+	NSString *itunesAuthor;
+	NSString *itunesSubtitle;
+	NSString *itunesSummary;
+	NSString *itunesBlock;
+	NSString *itunesDuration;
+	NSString *itunesKeywords;
+	NSString *itunesExplict;
 }
 @property (nonatomic, copy, readonly) NSString *title;
 // RSS <link> or Atom <link rel="alternate">
@@ -59,6 +69,16 @@
 @property (nonatomic, copy, readonly) NSDate *pubDate;
 @property (nonatomic, copy, readonly) NSString *author;
 @property (nonatomic, copy, readonly) NSArray *enclosures;
+// for use with media:thumbnail property
+@property (nonatomic, copy, readonly) NSString *thumbnailURL;
+// for use with itunes podcasts
+@property (nonatomic, copy, readonly) NSString *itunesAuthor;
+@property (nonatomic, copy, readonly) NSString *itunesSubtitle;
+@property (nonatomic, copy, readonly) NSString *itunesSummary;
+@property (nonatomic, copy, readonly) NSString *itunesBlock;
+@property (nonatomic, copy, readonly) NSString *itunesDuration;
+@property (nonatomic, copy, readonly) NSString *itunesKeywords;
+@property (nonatomic, copy, readonly) NSString *itunesExplict;
 // parent class defines property NSArray *extensionElements
 // parent class defines method - (NSArray *)extensionElementsWithXMLNamespace:(NSString *)namespaceURI
 // parent class defines method - (NSArray *)extensionElementsWithXMLNamespace:(NSString *)namespaceURI elementName:(NSString *)elementName
