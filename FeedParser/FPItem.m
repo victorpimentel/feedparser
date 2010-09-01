@@ -93,30 +93,6 @@
 	}
 }
 
-- (void)dealloc {
-	[title release];
-	[link release];
-	[links release];
-	[guid release];
-	[description release];
-	[content release];
-	[pubDate release];
-	[creator release];
-	[author release];
-	[enclosures release];
-	//MediaRSS
-	self.thumbnailURL  = nil;
-	//iTunes
-	self.itunesAuthor = nil;
-	self.itunesSubtitle = nil;
-	self.itunesSummary = nil;
-	self.itunesBlock = nil;
-	self.itunesDuration = nil;
-	self.itunesKeywords = nil;
-	self.itunesExplict = nil;
-	[super dealloc];
-}
-
 - (id)initWithBaseNamespaceURI:(NSString *)namespaceURI {
 	if (self = [super initWithBaseNamespaceURI:namespaceURI]) {
 		links = [[NSMutableArray alloc] init];
@@ -206,6 +182,14 @@
 	[creator release];
 	[author release];
 	[enclosures release];
+	[thumbnailURL release];
+	[itunesAuthor release];
+	[itunesSubtitle release];
+	[itunesSummary release];
+	[itunesBlock release];
+	[itunesDuration release];
+	[itunesKeywords release];
+	[itunesExplict release];
 	[super dealloc];
 }
 
