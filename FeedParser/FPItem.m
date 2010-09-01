@@ -105,15 +105,15 @@
 	[author release];
 	[enclosures release];
 	//MediaRSS
-	thumbnailURL  = nil;
+	self.thumbnailURL  = nil;
 	//iTunes
-	itunesAuthor = nil;
-	itunesSubtitle = nil;
-	itunesSummary = nil;
-	itunesBlock = nil;
-	itunesDuration = nil;
-	itunesKeywords = nil;
-	itunesExplict = nil;
+	self.itunesAuthor = nil;
+	self.itunesSubtitle = nil;
+	self.itunesSummary = nil;
+	self.itunesBlock = nil;
+	self.itunesDuration = nil;
+	self.itunesKeywords = nil;
+	self.itunesExplict = nil;
 	[super dealloc];
 }
 
