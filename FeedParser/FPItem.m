@@ -168,7 +168,15 @@
 			(pubDate     == other->pubDate     || [pubDate     isEqual:other->pubDate])             &&
 			(creator     == other->creator     || [creator     isEqualToString:other->creator])     &&
 			(author      == other->author      || [author      isEqualToString:other->author])      &&
-			(enclosures  == other->enclosures  || [enclosures  isEqualToArray:other->enclosures]));
+			(thumbnailURL   == other->thumbnailURL   || [thumbnailURL   isEqualToString:other->thumbnailURL])   &&
+			(itunesAuthor   == other->itunesAuthor   || [itunesAuthor   isEqualToString:other->itunesAuthor])   &&
+			(itunesSubtitle == other->itunesSubtitle || [itunesSubtitle isEqualToString:other->itunesSubtitle]) &&
+			(itunesSummary  == other->itunesSummary  || [itunesSummary  isEqualToString:other->itunesSummary])  &&
+			(itunesBlock    == other->itunesBlock    || [itunesBlock    isEqualToString:other->itunesBlock])    &&
+			(itunesDuration == other->itunesDuration || [itunesDuration isEqualToString:other->itunesDuration]) &&
+			(itunesKeywords == other->itunesKeywords || [itunesKeywords isEqualToString:other->itunesKeywords]) &&
+			(itunesExplict  == other->itunesExplict  || [itunesExplict  isEqualToString:other->itunesExplict])  &&
+			(enclosures  == other->enclosures || [enclosures  isEqualToArray:other->enclosures]));
 }
 
 - (void)dealloc {
@@ -208,6 +216,14 @@
 		creator = [[aDecoder decodeObjectForKey:@"creator"] copy];
 		author = [[aDecoder decodeObjectForKey:@"author"] copy];
 		enclosures = [[aDecoder decodeObjectForKey:@"enclosures"] mutableCopy];
+		thumbnailURL = [[aDecoder decodeObjectForKey:@"thumbnailURL"] copy];
+		itunesAuthor = [[aDecoder decodeObjectForKey:@"itunesAuthor"] copy];
+		itunesSubtitle = [[aDecoder decodeObjectForKey:@"itunesSubtitle"] copy];
+		itunesSummary = [[aDecoder decodeObjectForKey:@"itunesSummary"] copy];
+		itunesBlock = [[aDecoder decodeObjectForKey:@"itunesBlock"] copy];
+		itunesDuration = [[aDecoder decodeObjectForKey:@"itunesDuration"] copy];
+		itunesKeywords = [[aDecoder decodeObjectForKey:@"itunesKeywords"] copy];
+		itunesExplict = [[aDecoder decodeObjectForKey:@"itunesExplict"] copy];
 	}
 	return self;
 }
@@ -224,6 +240,14 @@
 	[aCoder encodeObject:creator forKey:@"creator"];
 	[aCoder encodeObject:author forKey:@"author"];
 	[aCoder encodeObject:enclosures forKey:@"enclosures"];
+	[aCoder encodeObject:thumbnailURL forKey:@"thumbnailURL"];
+	[aCoder encodeObject:itunesAuthor forKey:@"itunesAuthor"];
+	[aCoder encodeObject:itunesSubtitle forKey:@"itunesSubtitle"];
+	[aCoder encodeObject:itunesSummary forKey:@"itunesSummary"];
+	[aCoder encodeObject:itunesBlock forKey:@"itunesBlock"];
+	[aCoder encodeObject:itunesDuration forKey:@"itunesDuration"];
+	[aCoder encodeObject:itunesKeywords forKey:@"itunesKeywords"];
+	[aCoder encodeObject:itunesExplict forKey:@"itunesExplict"];
 }
 
 @end
