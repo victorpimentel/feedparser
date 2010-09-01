@@ -169,6 +169,8 @@ void (*handleExtensionElement)(id, SEL, FPExtensionNode *node, NSXMLParser*) = (
 			break;
 		case FPXMLParserSkipElementType:
 			break;
+		default:
+			break;
 	}
 }
 
@@ -196,6 +198,8 @@ void (*handleExtensionElement)(id, SEL, FPExtensionNode *node, NSXMLParser*) = (
 			[self abortParsing:parser withFormat:@"Unexpected CDATA at line %d", [parser lineNumber]];
 			break;
 		case FPXMLParserSkipElementType:
+			break;
+		default:
 			break;
 	}
 }
@@ -255,6 +259,8 @@ void (*handleExtensionElement)(id, SEL, FPExtensionNode *node, NSXMLParser*) = (
 						[extensionElements addObject:node];
 						[node release];
 						break;
+					default:
+						break;
 				}
 			} else if ([namespaceURI isEqualToString:baseNamespaceURI]) {
 				[self abortParsing:parser];
@@ -284,6 +290,8 @@ void (*handleExtensionElement)(id, SEL, FPExtensionNode *node, NSXMLParser*) = (
 			// we should never parse an element while in this type
 			NSAssert(NO, @"Encountered FPXMLParserExtensionElementType on generic FPXMLParser");
 			break;
+		default:
+			break;
 	}
 }
 
@@ -312,6 +320,8 @@ void (*handleExtensionElement)(id, SEL, FPExtensionNode *node, NSXMLParser*) = (
 			if (skipDepth == 0) {
 				currentElementType = FPXMLParserStreamElementType;
 			}
+			break;
+		default:
 			break;
 	}
 }
