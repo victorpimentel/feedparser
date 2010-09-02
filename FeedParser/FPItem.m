@@ -78,7 +78,7 @@
 		// Content
 		[self registerTextHandler:@selector(setContent:) forElement:@"encoded" namespaceURI:kFPXMLParserContentNamespaceURI];
 		// Media RSS
-		[self registerTextHandler:@selector(mediaRSS_content:attributes:parser:) forElement:@"content" namespaceURI:kFPXMLParserMediaRSSNamespaceURI];
+		[self registerHandler:@selector(mediaRSS_attributes:parser:)forElement:@"content" namespaceURI:kFPXMLParserMediaRSSNamespaceURI type:FPXMLParserStreamElementType];
 		[self registerTextHandler:@selector(mediaRSS_thumbnail:attributes:parser:) forElement:@"thumbnail" namespaceURI:kFPXMLParserMediaRSSNamespaceURI];
 		
 		// Podcasts
@@ -132,7 +132,7 @@
 	self.thumbnailURL = url;
 }
 
--(void) mediaRSS_content:(NSString *)text attributes:(NSDictionary*)attributes parser:(NSXMLParser *)parser {
+-(void) mediaRSS_attributes:(NSDictionary*)attributes parser:(NSXMLParser *)parser {
 	NSString *type = [attributes objectForKey:@"type"];
 	NSString *url = [attributes objectForKey:@"url"];
 	if(type && url){

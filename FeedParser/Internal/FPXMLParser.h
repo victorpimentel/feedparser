@@ -66,6 +66,7 @@ extern NSString * const kFPXMLParserItunesPodcastNamespaceURI;
 // automatically validates the extension node to ensure it only contains text, and then passes that string to the handler.
 // This is the equivalent of an FPXMLParserTextElementType parser for extension elements.
 + (void)registerTextHandler:(SEL)selector forElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI;
++ (void)registerHandler:(SEL)selector forElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI type:(FPXMLParserElementType)type;
 - (id)initWithBaseNamespaceURI:(NSString *)namespaceURI;
 - (void)abortParsing:(NSXMLParser *)parser;
 - (void)abortParsing:(NSXMLParser *)parser withFormat:(NSString *)description, ...;

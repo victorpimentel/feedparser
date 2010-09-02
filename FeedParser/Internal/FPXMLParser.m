@@ -56,6 +56,13 @@ void (*handleExtensionElement)(id, SEL, FPExtensionNode *node, NSXMLParser*) = (
 	}
 }
 
+// registerRSSHandler:forElement:type:
+// registerAtomHandler:forElement:type:
+// registerHandler:forElement:namespaceURI:
+// registerTextHandler:forElement:namespaceURI:
+// 
+// registerHandler:forElement:namespaceURI:type:
+
 + (void)registerRSSHandler:(SEL)selector forElement:(NSString *)elementName type:(FPXMLParserElementType)type {
 	[self registerHandler:selector forElement:elementName namespaceURI:@"" type:type];
 }
