@@ -28,6 +28,7 @@
 
 @class FPParser;
 @class FPLink;
+@class FPItem;
 
 @interface FPFeed : FPXMLParser <NSCoding> {
 @private
@@ -51,4 +52,5 @@
 // parent class defines property NSArray *extensionElements
 // parent class defines method -(NSArray *)extensionElementsWithXMLNamespace:(NSString *)namespaceURI
 // parent class defines method - (NSArray *)extensionElementsWithXMLNamespace:(NSString *)namespaceURI elementName:(NSString *)elementName
+- (FPItem *)newItemWithBaseNamespaceURI:(NSString *)namespaceURI;
 @end

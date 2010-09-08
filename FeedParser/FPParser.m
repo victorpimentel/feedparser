@@ -29,10 +29,6 @@
 
 NSString * const FPParserErrorDomain = @"FPParserErrorDomain";
 
-@interface FPParser ()
-- (FPFeed *)parseData:(NSData *)data error:(NSError **)error;
-@end
-
 @implementation FPParser
 + (void)initialize {
 	if (self == [FPParser class]) {
@@ -43,7 +39,7 @@ NSString * const FPParserErrorDomain = @"FPParserErrorDomain";
 }
 
 + (FPFeed *)parsedFeedWithData:(NSData *)data error:(NSError **)error {
-	FPParser *parser = [[[FPParser alloc] init] autorelease];
+	FPParser *parser = [[[[self class] alloc] init] autorelease];
 	return [parser parseData:data error:error];
 }
 
@@ -54,6 +50,10 @@ NSString * const FPParserErrorDomain = @"FPParserErrorDomain";
 }
 
 #pragma mark -
+
+- (FPFeed *)newFeedWithBaseNamespaceURI: (NSString *)namespaceURI {
+	return [[FPFeed alloc] initWithBaseNamespaceURI: namespaceURI];
+}
 
 - (FPFeed *)parseData:(NSData *)data error:(NSError **)error {
 	NSXMLParser *xmlParser = [[[NSXMLParser alloc] initWithData:data] autorelease];
@@ -146,7 +146,7 @@ NSString * const FPParserErrorDomain = @"FPParserErrorDomain";
 	if (feed != nil || !lookingForChannel) {
 		[self abortParsing:parser];
 	} else {
-		feed = [[FPFeed alloc] initWithBaseNamespaceURI:baseNamespaceURI];
+		feed = [self newFeedWithBaseNamespaceURI: baseNamespaceURI];
 		[feed acceptParsing:parser];
 		lookingForChannel = NO;
 	}
@@ -156,7 +156,7 @@ NSString * const FPParserErrorDomain = @"FPParserErrorDomain";
 	if (feed != nil || lookingForChannel) {
 		[self abortParsing:parser];
 	} else {
-		feed = [[FPFeed alloc] initWithBaseNamespaceURI:baseNamespaceURI];
+		feed = [self newFeedWithBaseNamespaceURI: baseNamespaceURI];
 		[feed acceptParsing:parser];
 	}
 }

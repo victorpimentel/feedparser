@@ -35,4 +35,5 @@
 	BOOL lookingForChannel;
 }
 + (FPFeed *)parsedFeedWithData:(NSData *)data error:(NSError **)error;
+- (FPFeed *)parseData:(NSData *)data error:(NSError **)error;
 @end

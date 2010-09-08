@@ -68,6 +68,10 @@
 	return self;
 }
 
+- (FPItem *)newItemWithBaseNamespaceURI:(NSString *)namespaceURI {
+	return [[FPItem alloc] initWithBaseNamespaceURI: namespaceURI];
+}
+
 - (void)rss_pubDate:(NSString *)textValue attributes:(NSDictionary *)attributes parser:(NSXMLParser *)parser {
 	NSDate *date = [NSDate dateWithRFC822:textValue];
 	self.pubDate = date;
@@ -75,7 +79,7 @@
 }
 
 - (void)rss_item:(NSDictionary *)attributes parser:(NSXMLParser *)parser {
-	FPItem *item = [[FPItem alloc] initWithBaseNamespaceURI:baseNamespaceURI];
+	FPItem *item = [self newItemWithBaseNamespaceURI:baseNamespaceURI];
 	[item acceptParsing:parser];
 	[items addObject:item];
 	[item release];
