@@ -369,10 +369,6 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Foundation.framework/Headers/Foundation.h";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = /usr/local/lib;
-				OTHER_CFLAGS = (
-					"-Xclang",
-					"-fobjc-nonfragile-abi2",
-				);
 				PREBINDING = NO;
 				PRODUCT_NAME = FeedParser;
 			};
