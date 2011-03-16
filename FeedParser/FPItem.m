@@ -70,7 +70,7 @@
 		[self registerRSSHandler:@selector(setCategory:) forElement:@"category" type:FPXMLParserTextElementType];
 		[self registerRSSHandler:@selector(rss_enclosure:parser:) forElement:@"enclosure" type:FPXMLParserSkipElementType];
 		
-		for (NSString *key in [NSArray arrayWithObjects:@"category", @"comments", @"source", nil]) {
+		for (NSString *key in [NSArray arrayWithObjects:@"comments", @"source", nil]) {
 			[self registerRSSHandler:NULL forElement:key type:FPXMLParserSkipElementType];
 		}
 		// Atom
