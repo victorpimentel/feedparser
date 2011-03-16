@@ -37,7 +37,7 @@
 
 - (id)initWithElementName:(NSString *)aName namespaceURI:(NSString *)aNamespaceURI qualifiedName:(NSString *)qName
 			   attributes:(NSDictionary *)attributeDict {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		name = [aName copy];
 		qualifiedName = [qName copy];
 		namespaceURI = [aNamespaceURI copy];
@@ -170,7 +170,7 @@
 #pragma mark Coding Support
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-	if (self = [super initWithCoder:aDecoder]) {
+	if ((self = [super initWithCoder:aDecoder])) {
 		name = [[aDecoder decodeObjectForKey:@"name"] copy];
 		qualifiedName = [[aDecoder decodeObjectForKey:@"qualifiedName"] copy];
 		namespaceURI = [[aDecoder decodeObjectForKey:@"namespaceURI"] copy];

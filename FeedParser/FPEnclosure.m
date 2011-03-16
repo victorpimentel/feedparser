@@ -34,7 +34,7 @@
 }
 
 - (id)initWithURL:(NSString *)inurl length:(NSUInteger)inlength type:(NSString *)intype {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		url = [inurl copy];
 		length = inlength;
 		type = [intype copy];
@@ -64,7 +64,7 @@
 #pragma mark Coding Support
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		url = [[aDecoder decodeObjectForKey:@"url"] copy];
 		length = [[aDecoder decodeObjectForKey:@"length"] unsignedIntegerValue];
 		type = [[aDecoder decodeObjectForKey:@"type"] copy];

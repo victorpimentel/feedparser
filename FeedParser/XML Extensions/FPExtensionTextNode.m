@@ -28,7 +28,7 @@
 
 @implementation FPExtensionTextNode
 - (id)initWithStringValue:(NSString *)value {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		stringValue = [value copy];
 	}
 	return self;
@@ -61,7 +61,7 @@
 #pragma mark Coding Support
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-	if (self = [super initWithCoder:aDecoder]) {
+	if ((self = [super initWithCoder:aDecoder])) {
 		stringValue = [[aDecoder decodeObjectForKey:@"stringValue"] copy];
 	}
 	return self;

@@ -96,7 +96,7 @@
 }
 
 - (id)initWithBaseNamespaceURI:(NSString *)namespaceURI {
-	if (self = [super initWithBaseNamespaceURI:namespaceURI]) {
+	if ((self = [super initWithBaseNamespaceURI:namespaceURI])) {
 		links = [[NSMutableArray alloc] init];
 		enclosures = [[NSMutableArray alloc] init];
 	}
@@ -209,7 +209,7 @@
 #pragma mark Coding Support
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-	if (self = [super initWithCoder:aDecoder]) {
+	if ((self = [super initWithCoder:aDecoder])) {
 		title = [[aDecoder decodeObjectForKey:@"title"] copy];
 		link = [[aDecoder decodeObjectForKey:@"link"] retain];
 		links = [[aDecoder decodeObjectForKey:@"links"] mutableCopy];

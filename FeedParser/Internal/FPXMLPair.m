@@ -33,7 +33,7 @@
 }
 
 - (id)initWithFirst:(id)firstObject second:(id)secondObject {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		first = [firstObject retain];
 		second = [secondObject retain];
 	}

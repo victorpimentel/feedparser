@@ -33,7 +33,7 @@
 }
 
 - (id)initWithHref:(NSString *)inHref rel:(NSString *)inRel type:(NSString *)inType title:(NSString *)inTitle {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		href = [inHref copy];
 		rel = (inRel ? [inRel copy] : @"alternate");
 		type = [inType copy];
@@ -74,7 +74,7 @@
 #pragma mark Coding Support
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		href = [[aDecoder decodeObjectForKey:@"href"] copy];
 		rel = [[aDecoder decodeObjectForKey:@"rel"] copy];
 		type = [[aDecoder decodeObjectForKey:@"type"] copy];

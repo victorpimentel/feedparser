@@ -92,14 +92,14 @@ void (*handleExtensionElement)(id, SEL, FPExtensionNode *node, NSXMLParser*) = (
 }
 
 - (id)initWithBaseNamespaceURI:(NSString *)namespaceURI {
-	if (self = [self init]) {
+	if ((self = [self init])) {
 		baseNamespaceURI = [namespaceURI copy];
 	}
 	return self;
 }
 
 - (id)init {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		extensionElements = [[NSMutableArray alloc] init];
 		handlers = [[kHandlerMap objectForKey:[self class]] retain];
 		currentElementType = FPXMLParserStreamElementType;
@@ -376,7 +376,7 @@ void (*handleExtensionElement)(id, SEL, FPExtensionNode *node, NSXMLParser*) = (
 #pragma mark Coding Support
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-	if (self = [self init]) {
+	if ((self = [self init])) {
 		baseNamespaceURI = [[aDecoder decodeObjectForKey:@"baseNamespaceURI"] copy];
 		[extensionElements release];
 		extensionElements = [[aDecoder decodeObjectForKey:@"extensionElements"] mutableCopy];
