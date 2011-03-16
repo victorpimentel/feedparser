@@ -39,6 +39,7 @@
 	NSDate *pubDate;
 	NSString *creator; // <dc:creator>
 	NSString *author;
+	NSString *category;
 	NSMutableArray *enclosures;
 	//MediaRSS
 	NSString *thumbnailURL;
@@ -68,6 +69,7 @@
 @property (nonatomic, copy, readonly) NSString *creator; // <dc:creator>
 @property (nonatomic, copy, readonly) NSDate *pubDate;
 @property (nonatomic, copy, readonly) NSString *author;
+@property (nonatomic, copy, readonly) NSString *category;
 @property (nonatomic, copy, readonly) NSArray *enclosures;
 // for use with media:thumbnail property
 @property (nonatomic, copy, readonly) NSString *thumbnailURL;

@@ -36,6 +36,7 @@
 @property (nonatomic, copy, readwrite) NSString *creator;
 @property (nonatomic, copy, readwrite) NSDate *pubDate;
 @property (nonatomic, copy, readwrite) NSString *author;
+@property (nonatomic, copy, readwrite) NSString *category;
 //For use with MediaRSS
 @property (nonatomic, copy, readwrite) NSString *thumbnailURL;
 // for use with itunes podcasts
@@ -54,7 +55,7 @@
 @end
 
 @implementation FPItem
-@synthesize title, link, links, guid, description, content, pubDate, author, enclosures, thumbnailURL;
+@synthesize title, link, links, guid, description, content, pubDate, author, category, enclosures, thumbnailURL;
 @synthesize creator;
 @synthesize itunesAuthor,itunesSubtitle,itunesSummary,itunesBlock,itunesDuration,itunesKeywords,itunesExplict;
 
@@ -66,6 +67,7 @@
 		[self registerRSSHandler:@selector(setGuid:) forElement:@"guid" type:FPXMLParserTextElementType];
 		[self registerRSSHandler:@selector(setDescription:) forElement:@"description" type:FPXMLParserTextElementType];
 		[self registerRSSHandler:@selector(rss_pubDate:attributes:parser:) forElement:@"pubDate" type:FPXMLParserTextElementType];
+		[self registerRSSHandler:@selector(setCategory:) forElement:@"category" type:FPXMLParserTextElementType];
 		[self registerRSSHandler:@selector(rss_enclosure:parser:) forElement:@"enclosure" type:FPXMLParserSkipElementType];
 		
 		for (NSString *key in [NSArray arrayWithObjects:@"category", @"comments", @"source", nil]) {
@@ -168,6 +170,7 @@
 			(pubDate     == other->pubDate     || [pubDate     isEqual:other->pubDate])             &&
 			(creator     == other->creator     || [creator     isEqualToString:other->creator])     &&
 			(author      == other->author      || [author      isEqualToString:other->author])      &&
+			(author      == other->category    || [category    isEqualToString:other->category])    &&
 			(thumbnailURL   == other->thumbnailURL   || [thumbnailURL   isEqualToString:other->thumbnailURL])   &&
 			(itunesAuthor   == other->itunesAuthor   || [itunesAuthor   isEqualToString:other->itunesAuthor])   &&
 			(itunesSubtitle == other->itunesSubtitle || [itunesSubtitle isEqualToString:other->itunesSubtitle]) &&
@@ -189,6 +192,7 @@
 	[pubDate release];
 	[creator release];
 	[author release];
+	[category release];
 	[enclosures release];
 	[thumbnailURL release];
 	[itunesAuthor release];
@@ -215,6 +219,7 @@
 		pubDate = [[aDecoder decodeObjectForKey:@"pubDate"] copy];
 		creator = [[aDecoder decodeObjectForKey:@"creator"] copy];
 		author = [[aDecoder decodeObjectForKey:@"author"] copy];
+		category = [[aDecoder decodeObjectForKey:@"category"] copy];
 		enclosures = [[aDecoder decodeObjectForKey:@"enclosures"] mutableCopy];
 		thumbnailURL = [[aDecoder decodeObjectForKey:@"thumbnailURL"] copy];
 		itunesAuthor = [[aDecoder decodeObjectForKey:@"itunesAuthor"] copy];
@@ -239,6 +244,7 @@
 	[aCoder encodeObject:pubDate forKey:@"pubDate"];
 	[aCoder encodeObject:creator forKey:@"creator"];
 	[aCoder encodeObject:author forKey:@"author"];
+	[aCoder encodeObject:category forKey:@"category"];
 	[aCoder encodeObject:enclosures forKey:@"enclosures"];
 	[aCoder encodeObject:thumbnailURL forKey:@"thumbnailURL"];
 	[aCoder encodeObject:itunesAuthor forKey:@"itunesAuthor"];
