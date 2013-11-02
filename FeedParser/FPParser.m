@@ -88,6 +88,12 @@ NSString * const FPParserErrorDomain = @"FPParserErrorDomain";
 			*error = [xmlParser parserError];
 			if ([[*error domain] isEqualToString:NSXMLParserErrorDomain]) {
 				if ([*error code] == NSXMLParserInternalError) {
+					// nil means we aborted, but NSXMLParser didn't record the error
+					// there's a bug in NSXMLParser which means aborting in some cases produces no error value
+					if (errorString == nil) {
+						// no errorString means the parse actually succeeded, but didn't contain a feed
+						errorString = @"The XML document did not contain a feed";
+					}
 					NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errorString forKey:NSLocalizedDescriptionKey];
 					*error = [NSError errorWithDomain:FPParserErrorDomain code:FPParserInternalError userInfo:userInfo];
 				} else {
